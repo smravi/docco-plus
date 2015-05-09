@@ -27,7 +27,17 @@
   "dependencies": {
     "commander": ">= 0.5.2",
     "fs-extra": ">= 0.6.0",
-    "docco": ">= 0.7"
+    "docco": ">= 0.7",
+    "glob": "*",
+    "minimatch": "*",
+    "jquery": "^1",
+    "jstree": "^3"
+  },
+  "devDependencies": {
+    "grunt": "^0",
+    "grunt-contrib-jshint": "^0",
+    "grunt-docco": "^0",
+    "grunt-gh-pages": "^0"
   },
   "main": "./lib",
   "bin": {

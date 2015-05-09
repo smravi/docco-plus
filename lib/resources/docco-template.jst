@@ -2,119 +2,42 @@
 
 <html>
 <head>
-  <title><%= title %></title>
+  <title><%= title.replace(/!/g, '/').replace(/\.[^\.\/\\]*?$/, '') %></title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <% if (css !== 'null') { %>
   <link rel="stylesheet" media="all" href="<%= css %>" />
-  <link rel="stylesheet" href="http://mbraak.github.io/jqTree/jqtree.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
-  <script src="http://mbraak.github.io/jqTree/tree.jquery.js" type="text/javascript"></script>
+  <% } %>
+  <link rel="stylesheet" href="jstree/themes/default-dark/style.min.css">
+  <link rel="stylesheet" href="docco-template.css">
+  <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="jstree/jstree.min.js" type="text/javascript"></script>
+  <script src="tree-builder.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="container">
     <div id="background"></div>
-    <div class="navigation">
-        <a href="../index.html">
-            <img alt="version" src="https://img.shields.io/badge/design-home-lightpink.svg" />
-        </a>
-        <a href="index.html">
-            <img alt="documentation" src="https://img.shields.io/badge/documentation-home-lightpink.svg" />
-        </a>
-        <a href="https://github.com/smravi/grunt-doc">
-            <img alt="version" src="https://img.shields.io/badge/version-1.0.0-brightgreen.svg" />
-        </a>
-    </div>
     <% if (sources.length > 0) { %>
     <script>
-
-       var links=[], treeJSON = [];
-        <% for (var i=0, l=sources.length; i<l; i++) { %>
-            <% var source = sources[i]; %>
-            var dest = '<%= path.basename(source)%>'
-            links.push(dest);
-        <% } %>
-        var hierarchy = {
-          label: 'root',
-          children: []
-        };
-        links.forEach(function (element) {
-          var srcArr = element.split('!');
-          var thisLevel = hierarchy;
-          srcArr.forEach(function (levelName, levelIndex) {
-            var level = thisLevel.children.filter(function (level) {
-              return level.label === levelName;
-            });
-            if (level.length) {
-              thisLevel = level[0]
-            } else {
-                if(levelIndex !== srcArr.length-1) {
-                     var newLevel = {
-                        label: levelName,
-                        children: []
-                     };
-                } else {
-                    var newLevel = {
-                        label: levelName
-                    };
-                }
-              thisLevel.children.push(newLevel);
-              thisLevel = newLevel;
-            }
-          });
-        });
-        hierarchy.label = hierarchy.children[0].label;
-        hierarchy.children = hierarchy.children[0].children;
-        treeJSON.push(hierarchy);
-
-    $(document).ready(function(){
-        $('#tree1').tree({
-            data: treeJSON,
-            autoOpen: false,
-            dragAndDrop: true
-        });
-         $('#tree1').bind(
-             'tree.click',
-             function(event, data) {
-                 // The clicked node is 'event.node'
-                 var node = event.node;
-                 var id = node.name;
-                 if(id.indexOf('.') !== -1 ){
-                    var path =[], pathStr='';
-                    while(node.name){
-                        path.push(node.name);
-                        node = node.parent;
-                    }
-                    path.reverse();
-                    var leaf = path[path.length-1]
-                    if(leaf) {
-                        path[path.length-1] = leaf.substring(0, leaf.lastIndexOf('.')) + '.html';
-                    }
-                    pathStr = path.join('!');
-                    $(location).attr('href', pathStr);
-                 }
-             }
-         );
-    });
+      var links = [];
+      var hrefs = [];
+      <% for (var i=0, l=sources.length; i<l; i++) { %>
+        links.push('<%= path.basename(sources[i]).replace(/!/g, "/").replace(/\.[^\.\/\\]*?$/, "")%>');
+        hrefs.push('<%=path.basename(destination(sources[i]))%>');
+      <% } %>
     </script>
-      <ul id="jump_to">
-        <li>
-          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
-          <a class="small" href="javascript:void(0);">+</a>
-          <div id="jump_wrapper">
-          <div id="jump_page_wrapper">
-            <div id="jump_page">
-               <div id="tree1"></div>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div id="jump_to">
+      <div class="title">navigator</div>
+      <div id="jump_page">
+        loading...
+      </div>
+    </div>
     <% } %>
     <ul class="sections">
         <% if (!hasTitle) { %>
           <li id="title">
               <div class="annotation">
-                  <h1><span><%= title.split('!').join('</span>/<span>') %></span></h1>
+                  <h1><span><%= title.replace(/!/g, '</span>/<span>').replace(/\.[^\.\/\\]*?$/, '') %></span></h1>
               </div>
           </li>
         <% } %>
