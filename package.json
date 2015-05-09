@@ -30,7 +30,8 @@
     "docco": ">= 0.7",
     "glob": "*",
     "minimatch": "*",
-    "jquery": "^1"
+    "jquery": "^1",
+    "jqtree": "*"
   },
   "devDependencies": {
     "grunt": "*"

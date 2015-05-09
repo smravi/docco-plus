@@ -5,41 +5,26 @@
   <title><%= title %></title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <% if (css !== 'null') { %>
   <link rel="stylesheet" media="all" href="<%= css %>" />
+  <% } %>
   <link rel="stylesheet" href="docco-template.css">
+  <link rel="stylesheet" href="jqtree.css">
   <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="tree.jquery.js" type="text/javascript"></script>
+  <script src="tree-builder.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="container">
     <div id="background"></div>
     <% if (sources.length > 0) { %>
     <script>
-      $(function () {
-        var element = $('<ul>');
-        var thisUl;
-        var tmp;
-        $('#jump_page').empty().append(element);
-        <% for (var i=0, l=sources.length; i<l; i++) { %>
-        thisUl = element;
-          '<%= path.basename(sources[i])%>'.split('!').forEach(function (item, index, array) {
-            if(index !== array.length - 1) {
-              if(!thisUl.find('#' + item).size()) {
-                thisUl = $('<ul>').appendTo(
-                  $('<li>').attr('id', item).html(item).appendTo(thisUl)
-                );
-              } else {
-                thisUl = thisUl.find('#' + item + ' > ul');
-              }
-            } else {
-              $('<li>').attr('id', item).append(
-                $('<a>').
-                  attr('href', '<%= path.basename(destination(sources[i])) %>').
-                  html(item)
-              ).appendTo(thisUl);
-            }
-          });
-        <% } %>
-      });
+      var links = [];
+      var hrefs = [];
+      <% for (var i=0, l=sources.length; i<l; i++) { %>
+        links.push('<%= path.basename(sources[i])%>');
+        hrefs.push('<%=path.basename(destination(sources[i]))%>');
+      <% } %>
     </script>
       <ul id="jump_to">
         <li>
@@ -48,12 +33,7 @@
           <div id="jump_wrapper">
           <div id="jump_page_wrapper">
             <div id="jump_page">
-              <% for (var i=0, l=sources.length; i<l; i++) { %>
-                <% var source = sources[i]; %>
-                <a class="source" href="<%= path.basename(destination(source)) %>">
-                  <span><%= path.basename(source).split('!').join('</span>/<span>') %></span>
-                </a>
-              <% } %>
+              loading...
             </div>
           </div>
           </div>
