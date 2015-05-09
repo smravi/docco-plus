@@ -31,7 +31,7 @@
     "glob": "*",
     "minimatch": "*",
     "jquery": "^1",
-    "jqtree": "*"
+    "jstree": "*"
   },
   "devDependencies": {
     "grunt": "*"
