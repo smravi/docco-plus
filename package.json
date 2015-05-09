@@ -27,7 +27,13 @@
   "dependencies": {
     "commander": ">= 0.5.2",
     "fs-extra": ">= 0.6.0",
-    "docco": ">= 0.7"
+    "docco": ">= 0.7",
+    "glob": "*",
+    "minimatch": "*",
+    "jquery": "^1"
+  },
+  "devDependencies": {
+    "grunt": "*"
   },
   "main": "./lib",
   "bin": {

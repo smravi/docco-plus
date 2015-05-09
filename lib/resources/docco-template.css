@@ -13,21 +13,6 @@ body {
   height: 100%;
 }
 
-.navigation {
-  position: fixed;
-  background: #ffffff;
-  padding: 5px 10px;
-  box-shadow: 0 0 25px #777;
-  border-radius: 0 0 5px 5px;
-  left: 20px;
-  z-index: 20;
-  white-space: nowrap;
-}
-
-.navigation a {
-  text-decoration: none;
-}
-
 #container {
   min-height: 100%;
 }
