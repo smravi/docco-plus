@@ -60,7 +60,7 @@ module.exports = function (grunt) {
       options: {
         base: '.docs',
         // GH_TOKEN is the environment variable holding the access token for the repository
-        repo: 'https://' + process.env.GH_TOKEN + '@github.com/pranavjha/chai-a11y.git',
+        repo: 'https://' + process.env.GH_TOKEN + '@github.com/smravi/docco-plus.git',
         clone: '.gh_pages',
         message: 'auto commit chai-a11y on <%= grunt.template.today("yyyy-mm-dd") %>',
         // This configuration will suppress logging and sanitize error messages.
