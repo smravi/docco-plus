@@ -31,10 +31,13 @@
     "glob": "*",
     "minimatch": "*",
     "jquery": "^1",
-    "jstree": "*"
+    "jstree": "^3"
   },
   "devDependencies": {
-    "grunt": "*"
+    "grunt": "^0",
+    "grunt-contrib-jshint": "^0",
+    "grunt-docco": "^0",
+    "grunt-gh-pages": "^0"
   },
   "main": "./lib",
   "bin": {

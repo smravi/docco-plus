@@ -1,4 +1,6 @@
 /*--------------------- Layout ----------------------------*/
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono|Open+Sans|Oswald);
+
 html {
   height: 100%;
 }
@@ -23,7 +25,7 @@ a {
 
 b, strong {
   font-weight: normal;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 p {
@@ -40,11 +42,17 @@ p {
   margin: 10px 0;
 }
 
+.annotation code {
+  font-size: inherit !important;
+  border: none !important;
+  background: transparent !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #112233;
   line-height: 1em;
   font-weight: normal;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Oswald', sans-serif;
   margin: 30px 0 15px 0;
 }
 
@@ -62,7 +70,7 @@ hr {
 pre, tt, code {
   font-size: 12px;
   line-height: 16px;
-  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+  font-family: "Ubuntu Mono", monospace;
   margin: 0;
   padding: 0;
 }
@@ -123,9 +131,8 @@ ul.sections > li > div {
   top: 0;
   bottom: 0;
   width: 200px;
-  border-right: 1px solid #e5e5ee;
   box-shadow: 0 0 5px #999999;
-  background: #f5f5ff;
+  background: #333333;
   overflow: auto;
   font-size: 80%;
   transition: all .5s;
@@ -133,7 +140,7 @@ ul.sections > li > div {
 
 #jump_to .title {
   padding: 10px;
-  background: #e5e5ee;
+  background: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -218,7 +225,6 @@ ul.sections > li > div {
     bottom: 0;
     width: 350px;
     background: #fff;
-    border-right: 1px solid #e5e5ee;
     z-index: -1;
   }
 
@@ -228,6 +234,7 @@ ul.sections > li > div {
 
   ul.sections > li {
     white-space: nowrap;
+    border-bottom: 1px solid #e5e5ee;
   }
 
   ul.sections > li > div {
