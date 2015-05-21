@@ -9,8 +9,18 @@
     "generator",
     "literate"
   ],
-  "author": "Sruthi Ravi",
-  "version": "0.0.0",
+  "author": "Pranav Jha <sruthiin92@gmail.com> (https://github.com/smravi)",
+  "contributors": [
+    {
+      "name": "sruthiravi",
+      "email": "sruthiin92@gmail.com"
+    },
+    {
+      "name": "jhapranav",
+      "email": "jha.pranav.s@gmail.com"
+    }
+  ],
+  "version": "1.0.0",
   "licenses": [
     {
       "type": "MIT",
