@@ -62,7 +62,7 @@
 <span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>);
 <span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>);
-<span class="hljs-keyword">var</span> <span class="hljs-built_in">document</span> = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options, callback)</span> </span>{</pre></div></div>
+<span class="hljs-keyword">var</span> <span class="hljs-built_in">document</span> = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">options, callback</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -95,7 +95,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> files = [];
-  options.args.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(glob1)</span> </span>{
+  options.args.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">glob1</span>) </span>{
     files = files.concat(glob.sync(glob1));
   });
   <span class="hljs-keyword">var</span> tempDir = <span class="hljs-built_in">require</span>(<span class="hljs-string">'os'</span>).tmpdir();</pre></div></div>
@@ -113,7 +113,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  options.args = files.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(file)</span> </span>{
+            <div class="content"><div class='highlight'><pre>  options.args = files.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">file</span>) </span>{
     <span class="hljs-keyword">if</span> (fs.statSync(file).isFile()) {</pre></div></div>
             
         </li>
@@ -250,11 +250,11 @@
   );
 };
 
-<span class="hljs-keyword">var</span> run = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+<span class="hljs-keyword">var</span> run = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
   commander.
     version(pkg.version).
     usage(<span class="hljs-string">'[options] glob-patterns'</span>).
-    option(<span class="hljs-string">'-L, --languages [file]'</span>, <span class="hljs-string">'use a custom languages.json'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(path)</span> </span>{
+    option(<span class="hljs-string">'-L, --languages [file]'</span>, <span class="hljs-string">'use a custom languages.json'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">path</span>) </span>{
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(path));
     }).</pre></div></div>
             

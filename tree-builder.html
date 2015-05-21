@@ -58,16 +58,16 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* jshint browser: true */</span>
 <span class="hljs-comment">/* globals $, links, hrefs*/</span>
-$(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+$(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 <span class="hljs-pi">  'use strict'</span>;
   <span class="hljs-keyword">var</span> treeData = {
     children: []
   };
   <span class="hljs-keyword">var</span> thisNode, parentNode;
   <span class="hljs-keyword">var</span> $tree = $(<span class="hljs-string">'#jump_page'</span>);
-  <span class="hljs-keyword">var</span> makeTree = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item, index, array)</span> </span>{
+  <span class="hljs-keyword">var</span> makeTree = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>{
     <span class="hljs-keyword">if</span> (index !== array.length - <span class="hljs-number">1</span>) {
-      <span class="hljs-keyword">var</span> thisNode = parentNode.children.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(node)</span> </span>{
+      <span class="hljs-keyword">var</span> thisNode = parentNode.children.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
         <span class="hljs-keyword">return</span> node.text === item;
       })[<span class="hljs-number">0</span>];
       <span class="hljs-keyword">if</span> (!thisNode) {
@@ -113,7 +113,7 @@ $(<span class="hljs-function"><span class="hljs-keyword">function</span> <span c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  $tree.on(<span class="hljs-string">'changed.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e, data)</span> </span>{
+            <div class="content"><div class='highlight'><pre>  $tree.on(<span class="hljs-string">'changed.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e, data</span>) </span>{
     <span class="hljs-keyword">if</span> (data.node.icon === <span class="hljs-string">'jstree-file'</span>) {
       <span class="hljs-built_in">window</span>.location.href = data.node.id;
     } <span class="hljs-keyword">else</span> {
@@ -135,7 +135,7 @@ $(<span class="hljs-function"><span class="hljs-keyword">function</span> <span c
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> leafNode = <span class="hljs-built_in">window</span>.location.href.split(<span class="hljs-string">'/'</span>).pop();
-  $tree.on(<span class="hljs-string">'ready.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  $tree.on(<span class="hljs-string">'ready.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
     $tree.jstree(<span class="hljs-string">'select_node'</span>, leafNode, <span class="hljs-literal">true</span>);
   });
 });</pre></div></div>
