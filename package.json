@@ -1,14 +1,12 @@
 {
   "name": "docco-plus",
   "description": "Extending docco to work on multi-folder structures",
-  "keywords": [
-    "documentation",
-    "docs",
-    "docco",
-    "folder",
-    "generator",
-    "literate"
-  ],
+  "homepage": "https://github.com/smravi/docco-plus",
+  "main": "./lib",
+  "version": "1.0.0",
+  "bin": {
+    "docco-plus": "./bin/docco-plus"
+  },
   "author": "Ravi Sruthi <sruthiin92@gmail.com> (https://github.com/smravi)",
   "contributors": [
     {
@@ -20,7 +18,6 @@
       "email": "jha.pranav.s@gmail.com"
     }
   ],
-  "version": "1.0.0",
   "licenses": [
     {
       "type": "MIT",
@@ -31,8 +28,8 @@
     "type": "git",
     "url": "https://github.com/smravi/docco-plus.git"
   },
-  "engines": {
-    "node": ">=0.2.0"
+  "bugs": {
+    "url": "https://github.com/smravi/docco-plus/issues"
   },
   "dependencies": {
     "commander": ">= 0.5.2",
@@ -49,8 +46,12 @@
     "grunt-docco": "^0",
     "grunt-gh-pages": "^0"
   },
-  "main": "./lib",
-  "bin": {
-    "docco-plus": "./bin/docco-plus"
-  }
+  "keywords": [
+    "documentation",
+    "docs",
+    "docco",
+    "folder",
+    "generator",
+    "literate"
+  ]
 }
