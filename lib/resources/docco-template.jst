@@ -5,11 +5,11 @@
   <title><%= title.replace(/!/g, '/').replace(/\.[^\.\/\\]*?$/, '') %></title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" href="jstree/themes/default-dark/style.min.css">
+  <link rel="stylesheet" href="docco-template.css">
   <% if (css !== 'null') { %>
   <link rel="stylesheet" media="all" href="<%= css %>" />
   <% } %>
-  <link rel="stylesheet" href="jstree/themes/default-dark/style.min.css">
-  <link rel="stylesheet" href="docco-template.css">
   <script src="jquery.min.js" type="text/javascript"></script>
   <script src="jstree/jstree.min.js" type="text/javascript"></script>
   <script src="tree-builder.js" type="text/javascript"></script>
