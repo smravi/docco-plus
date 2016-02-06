@@ -1,7 +1,7 @@
 {
     "name": "docco-plus",
     "description": "Extending docco to work on multi-folder structures",
-    "homepage": "https://github.com/smravi/docco-plus",
+    "homepage": "http://smravi.github.io/docco-plus/",
     "main": "./lib",
     "version": "1.0.2",
     "scripts": {
@@ -38,9 +38,9 @@
         "commander": ">= 0.5.2",
         "fs-extra": ">= 0.6.0",
         "docco": ">= 0.7",
-        "glob": "*",
-        "minimatch": "*",
-        "jquery": "^1",
+        "glob": "^6.0.4",
+        "minimatch": "^3.0.0",
+        "jquery": "^2",
         "jstree": "^3"
     },
     "devDependencies": {

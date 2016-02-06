@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/smravi/docco-plus.svg)](https://travis-ci.org/smravi/docco-plus)
 [![Code Climate](https://codeclimate.com/github/smravi/docco-plus/badges/gpa.svg)](https://codeclimate.com/github/smravi/docco-plus)
+[![Documentation](https://img.shields.io/badge/documentation-plus-green.svg?style=flat)](http://smravi.github.io/docco-plus/)
+
+
 
 [![Dependency Status](https://david-dm.org/smravi/docco-plus.svg)](https://david-dm.org/smravi/docco-plus)
 [![devDependency Status](https://david-dm.org/smravi/docco-plus/dev-status.svg)](https://david-dm.org/smravi/docco-plus#info=devDependencies)
