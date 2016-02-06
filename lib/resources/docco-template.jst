@@ -33,7 +33,7 @@
       </div>
     </div>
     <% } %>
-    <ul class="sections">
+    <ul class="sections <%= title.match(/\.([a-zA-Z0-9]*)$/).pop()%>">
         <% if (!hasTitle) { %>
           <li id="title">
               <div class="annotation">

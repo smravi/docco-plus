@@ -1,57 +1,68 @@
 {
-  "name": "docco-plus",
-  "description": "Extending docco to work on multi-folder structures",
-  "homepage": "https://github.com/smravi/docco-plus",
-  "main": "./lib",
-  "version": "1.0.1",
-  "bin": {
-    "docco-plus": "./bin/docco-plus"
-  },
-  "author": "Ravi Sruthi <sruthiin92@gmail.com> (https://github.com/smravi)",
-  "contributors": [
-    {
-      "name": "sruthiravi",
-      "email": "sruthiin92@gmail.com"
+    "name": "docco-plus",
+    "description": "Extending docco to work on multi-folder structures",
+    "homepage": "https://github.com/smravi/docco-plus",
+    "main": "./lib",
+    "version": "1.0.2",
+    "scripts": {
+        "test": "grunt jshint"
     },
-    {
-      "name": "jhapranav",
-      "email": "jha.pranav.s@gmail.com"
-    }
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/mit-license.php"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/smravi/docco-plus.git"
-  },
-  "bugs": {
-    "url": "https://github.com/smravi/docco-plus/issues"
-  },
-  "dependencies": {
-    "commander": ">= 0.5.2",
-    "fs-extra": ">= 0.6.0",
-    "docco": ">= 0.7",
-    "glob": "*",
-    "minimatch": "*",
-    "jquery": "^1",
-    "jstree": "^3"
-  },
-  "devDependencies": {
-    "grunt": "^0",
-    "grunt-contrib-jshint": "^0",
-    "grunt-docco": "^0",
-    "grunt-gh-pages": "^0"
-  },
-  "keywords": [
-    "documentation",
-    "docs",
-    "docco",
-    "folder",
-    "generator",
-    "literate"
-  ]
+    "bin": {
+        "docco-plus": "./bin/docco-plus"
+    },
+    "author": "Ravi Sruthi <sruthiin92@gmail.com> (https://github.com/smravi)",
+    "contributors": [
+        {
+            "name": "sruthiravi",
+            "email": "sruthiin92@gmail.com"
+        },
+        {
+            "name": "jhapranav",
+            "email": "jha.pranav.s@gmail.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/smravi/docco-plus.git"
+    },
+    "bugs": {
+        "url": "https://github.com/smravi/docco-plus/issues"
+    },
+    "dependencies": {
+        "commander": ">= 0.5.2",
+        "fs-extra": ">= 0.6.0",
+        "docco": ">= 0.7",
+        "glob": "*",
+        "minimatch": "*",
+        "jquery": "^1",
+        "jstree": "^3"
+    },
+    "devDependencies": {
+        "chai": "^3",
+        "grunt": "^0",
+        "grunt-contrib-clean": "^0",
+        "grunt-contrib-jshint": "^0",
+        "grunt-coveralls": "^1.0.0",
+        "grunt-docco-plus": "^1",
+        "grunt-env": "^0.4.4",
+        "grunt-gh-pages": "^1.0.0",
+        "grunt-istanbul": "^0.6.1",
+        "grunt-mocha-test": "^0",
+        "sinon": "^1.17.3",
+        "sinon-chai": "^2.8.0"
+    },
+    "keywords": [
+        "documentation",
+        "docs",
+        "docco",
+        "folder",
+        "generator",
+        "literate"
+    ]
 }
