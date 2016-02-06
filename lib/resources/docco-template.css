@@ -112,6 +112,19 @@ ul.sections {
     padding: 0 0 5px 0;
 }
 
+ul.sections.md {
+    background-color: #ffffff;
+}
+
+ul.sections.md .annotation {
+    width: 100%;
+    max-width: none;
+}
+
+ul.sections.md .content {
+    display: none;
+}
+
 /*
   Force border-box so that % widths fit the parent
   container without overlap because of margin/padding.

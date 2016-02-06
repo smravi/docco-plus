@@ -3,7 +3,7 @@
     "description": "Extending docco to work on multi-folder structures",
     "homepage": "https://github.com/smravi/docco-plus",
     "main": "./lib",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scripts": {
         "test": "grunt jshint"
     },
