@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>lib/index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" href="jstree/themes/default-dark/style.min.css">
+  <link rel="stylesheet" href="docco-template.css">
+  
+  <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="jstree/jstree.min.js" type="text/javascript"></script>
+  <script src="tree-builder.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <script>
+      var links = [];
+      var hrefs = [];
+      
+        links.push('Gruntfile.js');
+        hrefs.push('Gruntfile.js.html');
+      
+        links.push('README.md');
+        hrefs.push('README.md.html');
+      
+        links.push('lib/index.js');
+        hrefs.push('lib!index.js.html');
+      
+        links.push('lib/resources/tree-builder.js');
+        hrefs.push('lib!resources!tree-builder.js.html');
+      
+    </script>
+    <div id="jump_to">
+      <div class="title">navigator</div>
+      <div id="jump_page">
+        loading...
+      </div>
+    </div>
+    
+    <ul class="sections js">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1><span>lib</span>/<span>index.js</span></h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> commander = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>);
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>);
+<span class="hljs-keyword">var</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>);
+
+<span class="hljs-keyword">var</span> <span class="hljs-built_in">document</span> = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, callback</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>hardcode the template to the one we are using.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    options.template = <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/docco-template.jst'</span>);
+    options.layout = (options.layout || <span class="hljs-string">'parallel'</span>);
+    options.output = (options.output || <span class="hljs-string">'docs'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h3 id="copy-and-rename-source-files-for-use-and-put-it-in-temp-dir">copy and rename source files for use and put it in temp dir</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> files = [];
+    options.args.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">glob1</span>) </span>{
+        files = files.concat(glob.sync(glob1));
+    });
+    <span class="hljs-keyword">var</span> tempDir = <span class="hljs-built_in">require</span>(<span class="hljs-string">'os'</span>).tmpdir();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3 id="get-the-list-of-files-to-document-in-options">get the list of files to document in options</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    options.args = files.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">file</span>) </span>{
+        <span class="hljs-keyword">if</span> (fs.statSync(file).isFile()) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>get rid of the un-necessary ./ if it is there</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> fileName = file.replace(<span class="hljs-regexp">/[\\\/]+/g</span>, <span class="hljs-string">'!'</span>).replace(<span class="hljs-regexp">/^\.\!/</span>, <span class="hljs-string">''</span>) + path.extname(file);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>re-add the extension so that same names with different extensions can be handled</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> destPath = path.join(tempDir, fileName);
+            fs.copySync(file, destPath);
+            <span class="hljs-keyword">return</span> destPath;
+        }
+    });
+    <span class="hljs-keyword">if</span> (!options.args.length) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'no files to document!!! will not do anything.'</span>);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h3 id="run-docco">run docco</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">require</span>(<span class="hljs-string">'docco'</span>).document(options, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> indexFile = path.join(options.output, (options.index ? options.index + <span class="hljs-string">'.html'</span> : <span class="hljs-string">'README.md.html'</span>));
+        <span class="hljs-keyword">if</span> (fs.existsSync(indexFile)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <ul>
+<li>copy readme file as index</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            fs.copySync(
+                indexFile,
+                path.join(options.output, <span class="hljs-string">'index.html'</span>)
+            );
+        }
+        <span class="hljs-keyword">if</span> (callback) {
+            callback.apply({}, <span class="hljs-built_in">arguments</span>);
+        }
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h3 id="copy-resource-files">copy resource files</h3>
+<ul>
+<li>copy template css file</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    fs.copySync(
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/docco-template.css'</span>),
+        path.join(options.output, <span class="hljs-string">'docco-template.css'</span>)
+    );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <ul>
+<li>copy jquery js file</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    fs.copySync(
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jquery/dist/jquery.min.js'</span>),
+        path.join(options.output, <span class="hljs-string">'jquery.min.js'</span>)
+    );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <ul>
+<li>copy jstree distribution</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    fs.copySync(
+        path.dirname(<span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree'</span>)),
+        path.join(options.output, <span class="hljs-string">'jstree'</span>)
+    );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <ul>
+<li>copy tree builder js</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    fs.copySync(
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/tree-builder.js'</span>),
+        path.join(options.output, <span class="hljs-string">'tree-builder.js'</span>)
+    );
+};
+
+<span class="hljs-keyword">var</span> run = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    commander.version(
+        pkg.version
+    ).usage(
+        <span class="hljs-string">'[options] glob-patterns'</span>
+    ).option(
+        <span class="hljs-string">'-L, --languages [file]'</span>,
+        <span class="hljs-string">'use a custom languages.json'</span>,
+        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">path</span>) </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(path));
+        }
+    ).</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p> option(‘-l, –layout [name]’, ‘choose a layout (parallel, linear or classic)’, c.layout).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    option(
+        <span class="hljs-string">'-o, --output [path]'</span>,
+        <span class="hljs-string">'output to a given folder'</span>
+    ).option(
+        <span class="hljs-string">'-e, --extension [ext]'</span>,
+        <span class="hljs-string">'assume a file extension for all inputs'</span>
+    ).option(
+        <span class="hljs-string">'-c, --css [file]'</span>,
+        <span class="hljs-string">'use a custom css file'</span>
+    ).option(
+        <span class="hljs-string">'-m, --marked [file]'</span>,
+        <span class="hljs-string">'use custom marked options'</span>
+    ).option(
+        <span class="hljs-string">'-i, --index [file]'</span>,
+        <span class="hljs-string">'the file to be converted to index.html'</span>
+    ).parse(
+        process.argv
+    );
+    <span class="hljs-built_in">console</span>.log(commander.args);
+    <span class="hljs-keyword">if</span> (commander.args.length) {
+        <span class="hljs-built_in">document</span>(commander);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(commander.helpInformation());
+    }
+};
+
+<span class="hljs-built_in">module</span>.exports = {
+    <span class="hljs-built_in">document</span>: <span class="hljs-built_in">document</span>,
+    run: run
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

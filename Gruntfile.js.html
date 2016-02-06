@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Gruntfile.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" href="jstree/themes/default-dark/style.min.css">
+  <link rel="stylesheet" href="docco-template.css">
+  
+  <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="jstree/jstree.min.js" type="text/javascript"></script>
+  <script src="tree-builder.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <script>
+      var links = [];
+      var hrefs = [];
+      
+        links.push('Gruntfile.js');
+        hrefs.push('Gruntfile.js.html');
+      
+        links.push('README.md');
+        hrefs.push('README.md.html');
+      
+        links.push('lib/index.js');
+        hrefs.push('lib!index.js.html');
+      
+        links.push('lib/resources/tree-builder.js');
+        hrefs.push('lib!resources!tree-builder.js.html');
+      
+    </script>
+    <div id="jump_to">
+      <div class="title">navigator</div>
+      <div id="jump_page">
+        loading...
+      </div>
+    </div>
+    
+    <ul class="sections js">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1><span>Gruntfile.js</span></h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-meta">'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>js-hint options. See the complete list of options <a href="http://jshint.com/docs/options/">here</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> jshintOptions = {
+    nonew: <span class="hljs-literal">true</span>,
+    plusplus: <span class="hljs-literal">true</span>,
+    curly: <span class="hljs-literal">true</span>,
+    latedef: <span class="hljs-literal">true</span>,
+    maxdepth: <span class="hljs-number">6</span>,
+    unused: <span class="hljs-literal">true</span>,
+    noarg: <span class="hljs-literal">true</span>,
+    trailing: <span class="hljs-literal">true</span>,
+    indent: <span class="hljs-number">4</span>,
+    forin: <span class="hljs-literal">true</span>,
+    noempty: <span class="hljs-literal">true</span>,
+    quotmark: <span class="hljs-literal">true</span>,
+    maxparams: <span class="hljs-number">6</span>,
+    node: <span class="hljs-literal">true</span>,
+    eqeqeq: <span class="hljs-literal">true</span>,
+    strict: <span class="hljs-literal">true</span>,
+    undef: <span class="hljs-literal">true</span>,
+    bitwise: <span class="hljs-literal">true</span>,
+    newcap: <span class="hljs-literal">true</span>,
+    immed: <span class="hljs-literal">true</span>,
+    camelcase: <span class="hljs-literal">true</span>,
+    maxcomplexity: <span class="hljs-number">7</span>,
+    maxlen: <span class="hljs-number">120</span>,
+    nonbsp: <span class="hljs-literal">true</span>,
+    freeze: <span class="hljs-literal">true</span>
+};
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>loading the npm task</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    grunt.loadNpmTasks(<span class="hljs-string">'grunt-contrib-jshint'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-docco-plus'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-gh-pages'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-mocha-test'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-contrib-clean'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-istanbul'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-coveralls'</span>);
+    grunt.loadNpmTasks(<span class="hljs-string">'grunt-env'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Project configuration.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    grunt.initConfig({
+            pkg: grunt.file.readJSON(<span class="hljs-string">'package.json'</span>),
+            clean: [
+                <span class="hljs-string">'.coverage'</span>,
+                <span class="hljs-string">'.test'</span>,
+                <span class="hljs-string">'.cache'</span>
+            ],
+            jshint: {
+                lib: {
+                    src: [
+                        <span class="hljs-string">'lib/**/*.js'</span>,
+                        <span class="hljs-string">'!lib/resources/**/*.js'</span>,
+                        <span class="hljs-string">'Gruntfile.js'</span>,
+                        <span class="hljs-string">'package.json'</span>
+                    ],
+                    options: jshintOptions
+                }
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Configure a mochaTest task</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            mochaTest: {
+                test: {
+                    options: {
+                        reporter: <span class="hljs-string">'spec'</span>,
+                        timeout: <span class="hljs-number">50000</span>
+                    },
+                    src: [
+                        <span class="hljs-string">'test/*.js'</span>
+                    ]
+                }
+            },
+            instrument: {
+                files: [
+                    <span class="hljs-string">'lib/**/*.js'</span>
+                ],
+                options: {
+                    lazy: <span class="hljs-literal">false</span>,
+                    basePath: <span class="hljs-string">'.coverage/instrument/'</span>
+                }
+            },
+            storeCoverage: {
+                options: {
+                    dir: <span class="hljs-string">'.coverage/json/'</span>
+                }
+            },
+            makeReport: {
+                src: <span class="hljs-string">'.coverage/json/*.json'</span>,
+                options: {
+                    type: <span class="hljs-string">'lcov'</span>,
+                    dir: <span class="hljs-string">'.coverage/reports/'</span>,
+                    print: <span class="hljs-string">'detail'</span>
+                }
+            },
+            env: {
+                coverage: {
+                    APP_DIR_FOR_CODE_COVERAGE: <span class="hljs-string">'.coverage/instrument/'</span>
+                }
+            },
+            <span class="hljs-string">'docco-plus'</span>: {
+                debug: {
+                    src: [
+                        <span class="hljs-string">'lib/**'</span>,
+                        <span class="hljs-string">'test/**'</span>,
+                        <span class="hljs-string">'*.js'</span>,
+                        <span class="hljs-string">'*.md'</span>
+                    ],
+                    options: {
+                        output: <span class="hljs-string">'.docs/'</span>
+                    }
+                }
+            },
+            <span class="hljs-string">'gh-pages'</span>: {
+                options: {
+                    base: <span class="hljs-string">'.docs'</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>GH_TOKEN is the environment variable holding the access token for the repository</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    repo: <span class="hljs-string">'https://'</span> + process.env.GH_TOKEN + <span class="hljs-string">'@github.com/'</span> + process.env.TRAVIS_REPO_SLUG + <span class="hljs-string">'.git'</span>,
+                    clone: <span class="hljs-string">'.gh_pages'</span>,
+                    message: <span class="hljs-string">'build #'</span> + process.env.TRAVIS_BUILD_NUMBER + <span class="hljs-string">' travis commit'</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>This configuration will suppress logging and sanitize error messages.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    silent: <span class="hljs-literal">true</span>,
+                    user: {
+                        name: <span class="hljs-string">'travis'</span>,
+                        email: <span class="hljs-string">'travis@travis-ci.com'</span>
+                    }
+                },
+                src: [
+                    <span class="hljs-string">'**'</span>
+                ]
+            },
+            coveralls: {
+                lcov: {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>LCOV coverage file relevant to every target</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    src: <span class="hljs-string">'.coverage/reports/lcov.info'</span>
+                }
+            }
+        }
+    );
+    grunt.registerMultiTask(<span class="hljs-string">'docco-plus'</span>, <span class="hljs-string">'Docco-plus processor.'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>call docco-plus document method here</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">require</span>(<span class="hljs-string">'./'</span> + (process.env.APP_DIR_FOR_CODE_COVERAGE || <span class="hljs-string">''</span>) + <span class="hljs-string">'lib/index'</span>).document(<span class="hljs-keyword">this</span>.options({
+            args: <span class="hljs-keyword">this</span>.filesSrc
+        }), <span class="hljs-keyword">this</span>.async());
+    });
+    grunt.registerTask(<span class="hljs-string">'test'</span>, [
+        <span class="hljs-string">'jshint'</span>
+    ]);
+    grunt.registerTask(<span class="hljs-string">'document'</span>, [
+        <span class="hljs-string">'docco-plus'</span>
+    ]);
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
