@@ -43,7 +43,8 @@ module.exports = function(grunt) {
             clean: [
                 '.coverage',
                 '.test',
-                '.cache'
+                '.cache',
+                '.docs'
             ],
             jshint: {
                 lib: {
