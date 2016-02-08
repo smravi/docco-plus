@@ -3,7 +3,10 @@ html, body {
 }
 
 body > h1 {
-    padding: 0 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 0;
+    background: #f0f0f0;
 }
 
 body > .subHeading {
@@ -67,7 +70,7 @@ ul.sectionDetails {
 }
 
 ul.sectionDetails > li {
-    border-bottom: 1px solid #d0d0d0;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .annotation, .content {
