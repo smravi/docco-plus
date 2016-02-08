@@ -7,46 +7,44 @@
     <meta name="viewport"
         content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <% for( var i = 0, j = options.resources.css.length; i < j; i++) { %>
-    <link rel="stylesheet" media="all" href="<%= path.relative(path.dirname(destination), options.resources.css[i]) %>" />
+    <link rel="stylesheet"
+        media="all"
+        href="<%= path.relative(path.dirname(destination), options.resources.css[i]) %>"/>
     <% } %>
 
     <% for( var i = 0, j = options.resources.js.length; i < j; i++) { %>
-    <script src="<%=path.relative(path.dirname(destination), options.resources.js[i])  %>" type="text/javascript"></script>
+    <script src="<%=path.relative(path.dirname(destination), options.resources.js[i])  %>"
+        type="text/javascript"></script>
     <% } %>
 
+    <script type="application/json" id="jsTreeJSON">
+        <%= JSON.stringify(fileArray) %>
+    </script>
 </head>
 <body>
-<h1><%=srcPath %></h1>
-<nav>
-    <ul>
-        <% for (var i=0, j=options.files.length; i<j; i++) { %>
-
-        <li>
-            <a href="<%=path.relative(
-                path.dirname(destination),
-                path.normalize(
-                    path.join(
-                        options.output,
-                        options.files[i]+'.html'
-                    )
-                )
-            ) %>">
-                <%= options.files[i] %>
-            </a>
+<h1>
+    <%=baseName %>
+</h1>
+<div class="subHeading">
+    <%=srcPath %>
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+</nav>
+<section>
+    <ul class="sectionDetails <%=sectionUlClass %>">
+        <% for (var i=0, j=sections.length; i < j; i++) { %>
+        <% var section = sections[i]; %>
+        <li id="section-<%= i + 1 %>">
+            <div class="annotation">
+                <%= section.docsHtml %>
+            </div>
+            <div class="content">
+                <%= section.codeHtml %>
+            </div>
         </li>
         <% } %>
     </ul>
-
-</nav><section>
-    <ul class="sectionDetails <%=sectionUlClass %>">
-    <% for (var i=0, j=sections.length; i<j; i++) { %>
-    <% var section = sections[i]; %>
-        <li id="section-<%= i + 1 %>"><div class="annotation">
-                <%= section.docsHtml %>
-            </div><div class="content">
-                <%= section.codeHtml %>
-            </div></li>
-    <% } %>
-    </ul>
-</section></body>
+</section>
+</body>
 </html>

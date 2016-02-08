@@ -2,15 +2,55 @@ html, body {
     font-size: 90%;
 }
 
-body > nav {
-    display: inline-block;
-    width: 250px;
-    vertical-align: top;
+body > h1 {
+    padding: 0 1rem;
+}
+
+body > .subHeading {
+    padding: 0 1rem;
+    position: absolute;
+    color: #9d9d9d;
+    top: 0;
+}
+
+.navigatorToggle {
+    font-size: 12px;
+    border: 0 none;
+    background: #9c9c9c;
+    cursor: pointer;
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    right: 5px;
+    border-radius: 0 0 12px 12px;
+    padding: 4px 10px 10px;
+    z-index: 20;
+}
+
+body > nav.navigationTree {
+    padding: 2em;
+    background: rgba(0, 0, 0, .8);
+    position: fixed;
+    width: 100%;
+    max-width: 400px;
+    left: calc(50% - 200px);
+    z-index: 10;
+    top: 100px;
+    bottom: 100px;
+    overflow: auto;
+}
+
+@media (max-width: 400px) {
+    body > nav.navigationTree {
+        left: 0;
+    }
+}
+
+nav.navigationTree.minimized {
+    display: none;
 }
 
 body > section {
-    display: inline-block;
-    width: calc(100% - 250px);
     vertical-align: top;
 }
 
@@ -35,6 +75,10 @@ ul.sectionDetails > li {
     width: 50%;
     padding: 1em;
     box-sizing: border-box;
+}
+
+.content {
+    font-size: 80%;
 }
 
 ul.sectionDetails::before {
@@ -92,6 +136,35 @@ ul.sectionDetails.docsOnly .content {
 
     .content {
         width: 100%;
+        background: rgba(0, 0, 200, 0.05);
     }
 
+}
+
+@media (min-width: 1000px) {
+    body > h1, body > .subHeading, body > section {
+        margin-left: 250px;
+    }
+
+    body > section {
+        width: calc(100% - 250px);
+    }
+
+    body > nav.navigationTree.minimized {
+        display: block;
+    }
+
+    body > nav.navigationTree {
+        left: 0;
+        bottom: 0;
+        top: 0;
+        width: 250px;
+        overflow: auto;
+        box-sizing: border-box;
+        position: fixed;
+    }
+
+    .navigatorToggle {
+        display: none;
+    }
 }
