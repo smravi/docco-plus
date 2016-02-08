@@ -156,6 +156,10 @@
         "name": "objectivec",
         "inlineComment": "//"
     },
+    ".marko": {
+        "name": "html",
+        "inlineComment": "<!--"
+    },
     ".mel": {
         "name": "mel",
         "inlineComment": "//"
