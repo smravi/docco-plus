@@ -32,15 +32,16 @@ body > nav.navigationTree {
     background: rgba(0, 0, 0, .8);
     position: fixed;
     width: 100%;
-    max-width: 400px;
-    left: calc(50% - 200px);
+    max-width: 500px;
+    left: calc(50% - 250px);
     z-index: 10;
     top: 100px;
     bottom: 100px;
     overflow: auto;
+    box-sizing: border-box;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     body > nav.navigationTree {
         left: 0;
     }
