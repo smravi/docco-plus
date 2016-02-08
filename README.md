@@ -11,7 +11,7 @@
 
 # docco-plus
 
-> docco-plus is an extension to [docco](http://jashkenas.github.io/docco/) with support for multiple folders and same file name with different extensions
+> docco-plus is an extension to [docco](http://jashkenas.github.io/docco/) with support for multiple folders and same file name with different extensions.
 
 
 ## How to use
@@ -20,7 +20,7 @@
 
 Install docco-plus globally using the command
 
-```
+```shell
 
 sudo npm install -g docco-plus
 
@@ -28,7 +28,7 @@ sudo npm install -g docco-plus
 
 ### Usage
 
-```
+```shell
 
 docco-plus [options] FILES
 
@@ -49,8 +49,10 @@ passed as-is to the docco processor. Refer the Docco documentation on more detai
 
  - `-o [path]` or `--output [path]` use a custom output path
 
- - `-e [ext]` or `--extension [ext]` use the given file extension for all inputs
-
  - `-L [file]` or `--languages [file]` use a custom languages.json
 
+ - `-t [path]` or `--template [path]` use a custom jst template file
+
  - `-m [file]` or `--marked [file]` use custom marked options
+
+ - `-i [file]` or `--index [file]` the file to be documented as the landing file for a folder
