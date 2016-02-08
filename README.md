@@ -59,4 +59,4 @@ passed as-is to the docco processor. Refer the Docco documentation on more detai
 
  - `-m [file]` or `--marked [file]` use custom marked options
 
- - `-i [file]` or `--index [file]` the file to be documented as the landing file for a folder
+ - `-i [file]` or `--index [file]` the file to be documented as the landing file for the documentation
