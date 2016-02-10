@@ -1,12 +1,14 @@
-[![Build Status](https://travis-ci.org/smravi/docco-plus.svg)](https://travis-ci.org/smravi/docco-plus)
-[![Code Climate](https://codeclimate.com/github/smravi/docco-plus/badges/gpa.svg)](https://codeclimate.com/github/smravi/docco-plus)
-[![Documentation](https://img.shields.io/badge/documentation-plus-green.svg?style=flat)](http://smravi.github.io/docco-plus/)
-[![Coverage Status](http://img.shields.io/coveralls/smravi/docco-plus.svg)](https://coveralls.io/r/smravi/docco-plus)
+[![Build Status](https://img.shields.io/travis/smravi/docco-plus.svg?style=flat-square)](https://travis-ci.org/smravi/docco-plus)
+[![Code Climate](https://img.shields.io/codeclimate/github/smravi/docco-plus.svg?style=flat-square)](https://codeclimate.com/github/smravi/docco-plus)
+[![Coverage Status](http://img.shields.io/coveralls/smravi/docco-plus.svg?style=flat-square)](https://coveralls.io/r/smravi/docco-plus)
+[![Documentation](https://img.shields.io/badge/documentation-plus-green.svg?style=flat-square)](http://smravi.github.io/docco-plus/)
 
+[![Dependency Status](https://img.shields.io/david/smravi/docco-plus.svg?style=flat-square)](https://david-dm.org/smravi/docco-plus)
+[![devDependency Status](https://img.shields.io/david/dev/smravi/docco-plus.svg?style=flat-square)](https://david-dm.org/smravi/docco-plus#info=devDependencies)
+[![peerDependency Status](https://img.shields.io/david/peer/smravi/docco-plus.svg?style=flat-square)](https://david-dm.org/smravi/docco-plus#info=peerDependencies)
 
-[![Dependency Status](https://david-dm.org/smravi/docco-plus.svg)](https://david-dm.org/smravi/docco-plus)
-[![devDependency Status](https://david-dm.org/smravi/docco-plus/dev-status.svg)](https://david-dm.org/smravi/docco-plus#info=devDependencies)
-[![peerDependency Status](https://david-dm.org/smravi/docco-plus/peer-status.svg)](https://david-dm.org/smravi/docco-plus#info=peerDependencies)
+[![NPM](https://nodei.co/npm/docco-plus.png)](https://nodei.co/npm/docco-plus/)
+[![NPM](https://nodei.co/npm-dl/docco-plus.png?months=9&height=1)](https://nodei.co/npm/docco-plus/)
 
 
 # docco-plus
