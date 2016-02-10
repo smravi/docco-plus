@@ -1,12 +1,14 @@
 html, body {
-    font-size: 90%;
+    margin: 0;
 }
 
-body > h1 {
-    padding: 1rem;
+body.markdown-body {
+    overflow: auto;
+}
+
+body.markdown-body > h1 {
+    padding: 2rem 1rem 1rem 1rem;
     border-bottom: 1px solid #e0e0e0;
-    margin: 0;
-    background: #f0f0f0;
 }
 
 body > .subHeading {
@@ -42,6 +44,11 @@ body > nav.navigationTree {
     bottom: 100px;
     overflow: auto;
     box-sizing: border-box;
+}
+
+body > nav.navigationTree ul {
+    margin: 0;
+    padding: 0;
 }
 
 @media (max-width: 500px) {
@@ -81,15 +88,11 @@ ul.sectionDetails > li {
     box-sizing: border-box;
 }
 
-.content {
-    font-size: 80%;
-}
-
 ul.sectionDetails::before {
     content: ' ';
     position: absolute;
     z-index: -1;
-    background: rgba(0, 0, 200, 0.05);
+    background: #f7f7f7;
     width: 50%;
     top: 0;
     bottom: 0;
@@ -121,6 +124,25 @@ ul.sectionDetails.docsOnly .content {
     display: none;
 }
 
+#jsTreeSearch {
+    width: 100%;
+    border: 0 none;
+    background: rgba(255, 255, 255, .8);
+    font-size: .8em;
+    padding: .8em;
+    box-sizing: border-box;
+    color: #000000;
+}
+
+#jsTreeSearch:hover, #jsTreeSearch:focus {
+    background: rgba(255, 255, 255, .5);
+}
+
+.jstree-default-dark a.jstree-search {
+    font-weight: normal;
+    color: #ffffff;
+}
+
 @media (max-width: 767px) {
     body > nav {
         width: 100%;
@@ -147,11 +169,11 @@ ul.sectionDetails.docsOnly .content {
 
 @media (min-width: 1000px) {
     body > h1, body > .subHeading, body > section {
-        margin-left: 250px;
+        margin-left: 20%;
     }
 
     body > section {
-        width: calc(100% - 250px);
+        width: 80%;
     }
 
     body > nav.navigationTree.minimized {
@@ -162,7 +184,7 @@ ul.sectionDetails.docsOnly .content {
         left: 0;
         bottom: 0;
         top: 0;
-        width: 250px;
+        width: 20%;
         overflow: auto;
         box-sizing: border-box;
         position: fixed;

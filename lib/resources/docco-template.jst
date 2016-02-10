@@ -20,7 +20,7 @@
         <%= JSON.stringify(fileArray) %>
     </script>
 </head>
-<body>
+<body class="markdown-body">
 <h1>
     <%=title %>
 </h1>
@@ -29,6 +29,8 @@
 </div>
 <button type="button" class="navigatorToggle">&#9776; files...</button>
 <nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
 </nav>
 <section>
     <ul class="sectionDetails <%=sectionUlClass %>">

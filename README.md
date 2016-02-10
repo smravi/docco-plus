@@ -47,8 +47,6 @@ passed as-is to the docco processor. Refer the Docco documentation on more detai
 
  - `-c [file]` or `--css [file]` use a custom css file
 
- - `-t [file]` or `--theme [string]` use a custom markdown theme
-
  - `-h [string]` or `--highlightStyle [string]` use a highlightjs theme style. Styles are detailed [here](https://highlightjs.org/static/demo/)
 
  - `-o [path]` or `--output [path]` use a custom output path
