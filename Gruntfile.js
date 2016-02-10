@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 // js-hint options. See the complete list of options [here](http://jshint.com/docs/options/)
 var jshintOptions = {
     nonew: true,
@@ -34,6 +35,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-istanbul');
     grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-env');
@@ -43,8 +45,25 @@ module.exports = function(grunt) {
             clean: [
                 '.coverage',
                 '.test',
-                '.cache'
+                '.cache',
+                '.docs'
             ],
+            copy: {
+                coverage: {
+                    src: 'lib/**',
+                    dest: '.coverage/instrument/',
+                    // Copy if file does not exist.
+                    filter: function(filepath) {
+                        // Construct the destination file path.
+                        var dest = path.join(
+                            grunt.config('copy.coverage.dest'),
+                            path.relative(process.cwd(), filepath)
+                        );
+                        // Return false if the file exists.
+                        return !(grunt.file.exists(dest));
+                    }
+                }
+            },
             jshint: {
                 lib: {
                     src: [
@@ -136,7 +155,7 @@ module.exports = function(grunt) {
     );
     grunt.registerMultiTask('docco-plus', 'Docco-plus processor.', function() {
         // call docco-plus document method here
-        require('./' + (process.env.APP_DIR_FOR_CODE_COVERAGE || '') + 'lib/index').document(this.options({
+        require('./' + (process.env.APP_DIR_FOR_CODE_COVERAGE || '') + 'lib/document')(this.options({
             args: this.filesSrc
         }), this.async());
     });
@@ -145,5 +164,13 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('document', [
         'docco-plus'
+    ]);
+    grunt.registerTask('coverage', [
+        'instrument',
+        'copy:coverage',
+        'env:coverage',
+        'docco-plus',
+        'storeCoverage',
+        'makeReport'
     ]);
 };

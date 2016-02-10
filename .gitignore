@@ -31,3 +31,5 @@ node_modules
 .docs
 .test
 .coverage
+docs
+src

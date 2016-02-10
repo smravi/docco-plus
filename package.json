@@ -2,8 +2,8 @@
     "name": "docco-plus",
     "description": "Extending docco to work on multi-folder structures",
     "homepage": "http://smravi.github.io/docco-plus/",
-    "main": "./lib",
-    "version": "1.0.2",
+    "main": "./lib/document",
+    "version": "2.0.0-beta1",
     "scripts": {
         "test": "grunt jshint"
     },
@@ -35,18 +35,23 @@
         "url": "https://github.com/smravi/docco-plus/issues"
     },
     "dependencies": {
+        "bluebird": "latest",
         "commander": ">= 0.5.2",
+        "escape-html": "^1.0.3",
         "fs-extra": ">= 0.6.0",
-        "docco": ">= 0.7",
         "glob": "^6.0.4",
-        "minimatch": "^3.0.0",
+        "highlight.js": ">= 8.0.x",
         "jquery": "^2",
-        "jstree": "^3"
+        "jstree": "^3",
+        "marked": ">= 0.2.7",
+        "minimatch": "^3.0.0",
+        "underscore": "^1.8.3"
     },
     "devDependencies": {
         "chai": "^3",
         "grunt": "^0",
         "grunt-contrib-clean": "^0",
+        "grunt-contrib-copy": "^0",
         "grunt-contrib-jshint": "^0",
         "grunt-coveralls": "^1.0.0",
         "grunt-docco-plus": "^1",
