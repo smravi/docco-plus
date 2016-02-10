@@ -171,6 +171,7 @@ module.exports = function(grunt) {
         'env:coverage',
         'docco-plus',
         'storeCoverage',
-        'makeReport'
+        'makeReport',
+        'coveralls'
     ]);
 };
