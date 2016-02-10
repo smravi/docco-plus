@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>document</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_1.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_5.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/32px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/40px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/throbber.gif"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_7.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_8.css"/>
+    
+
+    
+    <script src="../assets/file_2.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_3.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_4.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_6.js"
+        type="text/javascript"></script>
+    
+
+    <script type="application/json" id="jsTreeJSON">
+        [{"id":"lib/parser.js","text":"parser.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"parser.js.html"},"state":{"selected":false}},{"id":"lib","text":"lib","icon":"jstree-folder","parent":"#","a_attr":{"href":"."},"state":{"opened":true}},{"id":"lib/file-resolver.js","text":"file-resolver.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"file-resolver.js.html"},"state":{"selected":false}},{"id":"lib/formatter.js","text":"formatter.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"formatter.js.html"},"state":{"selected":false}},{"id":"lib/markdown-renderer.js","text":"markdown-renderer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"markdown-renderer.js.html"},"state":{"selected":false}},{"id":"lib/normalizer.js","text":"normalizer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"normalizer.js.html"},"state":{"selected":false}},{"id":"lib/document.js","text":"document.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"document.js.html"},"state":{"selected":true}},{"id":"lib/resources","text":"resources","icon":"jstree-folder","parent":"lib","a_attr":{"href":"resources"},"state":{"opened":false}},{"id":"lib/resources/bootstrap.js","text":"bootstrap.js","icon":"jstree-file","parent":"lib/resources","a_attr":{"href":"resources/bootstrap.js.html"},"state":{"selected":false}},{"id":"lib/run.js","text":"run.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"run.js.html"},"state":{"selected":false}},{"id":"lib/writer.js","text":"writer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"writer.js.html"},"state":{"selected":false}},{"id":"Gruntfile.js","text":"Gruntfile.js","icon":"jstree-file","parent":"#","a_attr":{"href":"../Gruntfile.js.html"},"state":{"selected":false}},{"id":"README.md","text":"README.md","icon":"jstree-file","parent":"#","a_attr":{"href":"../README.md.html"},"state":{"selected":false}}]
+    </script>
+</head>
+<body class="markdown-body">
+<h1>
+    document
+</h1>
+<div class="subHeading">
+    lib/document.js
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
+</nav>
+<section>
+    <ul class="sectionDetails ">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+                
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>);
+<span class="hljs-keyword">var</span> <span class="hljs-built_in">Promise</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bluebird'</span>);
+<span class="hljs-keyword">var</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./parser'</span>);
+<span class="hljs-keyword">var</span> formatter = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./formatter'</span>);
+<span class="hljs-keyword">var</span> writer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./writer'</span>);
+<span class="hljs-keyword">var</span> normalizer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./normalizer'</span>);
+<span class="hljs-keyword">var</span> fileResolver = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./file-resolver'</span>);
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> fsPromise = {
+    readFile: <span class="hljs-built_in">Promise</span>.promisify(fs.readFile),
+    outputFile: <span class="hljs-built_in">Promise</span>.promisify(fs.outputFile)
+};</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+                <h3 id="copy-resource-files">copy resource files</h3>
+
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-keyword">var</span> copyAssets = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+    options.resources = {
+        css: [],
+        js: []
+    };</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+                <ul>
+<li>copy template css file</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/docco-template.css'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+                <ul>
+<li>copy jquery js file</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.js.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jquery/dist/jquery.min.js'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+                <ul>
+<li>copy jstree distribution js</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.js.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/dist/jstree.js'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+                <ul>
+<li>copy jstree search plugin js</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.js.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/src/jstree.search.js'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+                <ul>
+<li>copy jstree distribution css</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/dist/themes/default-dark/style.min.css'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+                <ul>
+<li>copy jstree distribution images</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/dist/themes/default-dark/32px.png'</span>),
+        <span class="hljs-string">'32px.png'</span>
+    ));
+    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/dist/themes/default-dark/40px.png'</span>),
+        <span class="hljs-string">'40px.png'</span>
+    ));
+    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'jstree/dist/themes/default-dark/throbber.gif'</span>),
+        <span class="hljs-string">'throbber.gif'</span>
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+                <ul>
+<li>copy bootstrap js file</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.js.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/bootstrap.js'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+                <ul>
+<li>copy highlightjs style</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'highlight.js/styles/'</span> + options.highlightStyle + <span class="hljs-string">'.css'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+                <ul>
+<li>copy markdown style</li>
+</ul>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.resources.css.push(fileResolver(
+        options,
+        <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/gfm.css'</span>)
+    ));</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+                <p> -copy config.css</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    <span class="hljs-keyword">if</span> (options.css) {
+        options.resources.css.push(fileResolver(
+            options,
+            options.css
+        ));
+    }
+    <span class="hljs-keyword">return</span> options;
+};
+
+<span class="hljs-keyword">var</span> createIndex = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">var</span> template = _.template(fs.readFileSync(<span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/index.jst'</span>)).toString());
+    <span class="hljs-keyword">var</span> html = template(options);
+    <span class="hljs-keyword">return</span> fsPromise.outputFile(path.join(options.output, <span class="hljs-string">'index.html'</span>), html).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> options;
+    });
+};</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+                <h3 id="document-the-source-files">document the source files</h3>
+
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-keyword">var</span> <span class="hljs-built_in">document</span> = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(
+        options.files.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">oneFile</span>) </span>{
+            <span class="hljs-keyword">return</span> fsPromise.readFile(oneFile, <span class="hljs-string">'utf8'</span>).then(
+                parser.bind(<span class="hljs-literal">null</span>, oneFile, options)
+            ).then(
+                formatter.bind(<span class="hljs-literal">null</span>, oneFile, options)
+            ).then(
+                writer.bind(<span class="hljs-literal">null</span>, oneFile, options)
+            );
+        })
+    ).spread(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> options;
+    });
+};
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, callback</span>) </span>{
+    callback = callback || <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">return</span>;
+        };</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+                <p> normalize the options options</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    <span class="hljs-keyword">return</span> normalizer(options).then(</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+                <p> copy assets</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>        copyAssets
+    ).then(</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+                <p> generate the documentation</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>        <span class="hljs-built_in">document</span>
+    ).then(
+        createIndex
+    ).then(
+        fileResolver.copyAssets
+    ).then(</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+                <p> call the callback with success</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>        callback.bind({}, <span class="hljs-literal">null</span>)
+    ).catch(</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+                <p> in case of exception call the callback with failure</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>        callback.bind({})
+    );
+};</pre></div>
+            </div>
+        </li>
+        
+    </ul>
+</section>
+</body>
+</html>

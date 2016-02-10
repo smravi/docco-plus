@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>normalizer</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_1.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_5.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/32px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/40px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/throbber.gif"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_7.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_8.css"/>
+    
+
+    
+    <script src="../assets/file_2.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_3.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_4.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_6.js"
+        type="text/javascript"></script>
+    
+
+    <script type="application/json" id="jsTreeJSON">
+        [{"id":"lib/parser.js","text":"parser.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"parser.js.html"},"state":{"selected":false}},{"id":"lib","text":"lib","icon":"jstree-folder","parent":"#","a_attr":{"href":"."},"state":{"opened":true}},{"id":"lib/file-resolver.js","text":"file-resolver.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"file-resolver.js.html"},"state":{"selected":false}},{"id":"lib/formatter.js","text":"formatter.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"formatter.js.html"},"state":{"selected":false}},{"id":"lib/markdown-renderer.js","text":"markdown-renderer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"markdown-renderer.js.html"},"state":{"selected":false}},{"id":"lib/normalizer.js","text":"normalizer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"normalizer.js.html"},"state":{"selected":true}},{"id":"lib/document.js","text":"document.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"document.js.html"},"state":{"selected":false}},{"id":"lib/resources","text":"resources","icon":"jstree-folder","parent":"lib","a_attr":{"href":"resources"},"state":{"opened":false}},{"id":"lib/resources/bootstrap.js","text":"bootstrap.js","icon":"jstree-file","parent":"lib/resources","a_attr":{"href":"resources/bootstrap.js.html"},"state":{"selected":false}},{"id":"lib/run.js","text":"run.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"run.js.html"},"state":{"selected":false}},{"id":"lib/writer.js","text":"writer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"writer.js.html"},"state":{"selected":false}},{"id":"Gruntfile.js","text":"Gruntfile.js","icon":"jstree-file","parent":"#","a_attr":{"href":"../Gruntfile.js.html"},"state":{"selected":false}},{"id":"README.md","text":"README.md","icon":"jstree-file","parent":"#","a_attr":{"href":"../README.md.html"},"state":{"selected":false}}]
+    </script>
+</head>
+<body class="markdown-body">
+<h1>
+    normalizer
+</h1>
+<div class="subHeading">
+    lib/normalizer.js
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
+</nav>
+<section>
+    <ul class="sectionDetails ">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+                
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> <span class="hljs-built_in">Promise</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bluebird'</span>);
+<span class="hljs-keyword">var</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>);
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs-extra'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> fsPromise = {
+    readFile: <span class="hljs-built_in">Promise</span>.promisify(fs.readFile),
+    stat: <span class="hljs-built_in">Promise</span>.promisify(fs.stat)
+};
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+                <p> set the template</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.template = (options.template || <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'./resources/docco-template.jst'</span>));
+    fsPromise.readFile(options.template, <span class="hljs-string">'utf8'</span>);
+    options.template = _.template(fs.readFileSync(options.template).toString());</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+                <p> default the output dir</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.output = (options.output || <span class="hljs-string">'docs'</span>);</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+                <p> defaulting languages</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.languages = options.languages ? fs.readJsonSync(options.languages) : <span class="hljs-built_in">require</span>(<span class="hljs-string">'./resources/languages.json'</span>);</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+                <p> defaulting the theme</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.theme = options.theme || <span class="hljs-string">'foghorn'</span>;</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+                <p> default the highlightjs style</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.highlightStyle = options.highlightStyle || <span class="hljs-string">'solarized-light'</span>;
+
+    <span class="hljs-built_in">Object</span>.keys(options.languages).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lang</span>) </span>{
+        <span class="hljs-keyword">if</span> (options.languages[lang].inlineComment) {
+            options.languages[lang].inlineCommentMatcher = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'^\\s*'</span> + options.languages[lang].inlineComment);
+        } <span class="hljs-keyword">else</span> {
+            options.languages[lang].inlineCommentMatcher = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'^'</span>);
+        }
+    });</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+                <p> defaulting the marked options</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    options.marked = options.marked || {
+            smartypants: <span class="hljs-literal">true</span>,
+            gfm: <span class="hljs-literal">true</span>
+        };</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+                <p> expand the list of files to document</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(options.args.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">glob1</span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.promisify(glob)(glob1);
+    })).spread(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.prototype.concat.apply([], <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>));
+    }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">files</span>) </span>{
+        options.files = files;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(options.files.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">path</span>) </span>{
+            <span class="hljs-keyword">return</span> fsPromise.stat(path);
+        }));
+    }).spread(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">arguments</span>;
+        options.files = options.files.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">filePath, index</span>) </span>{
+            <span class="hljs-keyword">return</span> args[index].isFile() &amp;&amp; options.languages[path.extname(filePath)];
+        });
+        <span class="hljs-keyword">return</span> options.files;
+    }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (!options.files.length) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'no files to document!!! will not do anything.'</span>);
+        }</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+                <p> default the value for index</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>        <span class="hljs-keyword">if</span> (!options.index) {
+            <span class="hljs-keyword">var</span> indexMatcherRegex = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'^readme\\.md$'</span>, <span class="hljs-string">'i'</span>);
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, j = options.files.length; i &lt; j; i = i + <span class="hljs-number">1</span>) {
+                <span class="hljs-keyword">if</span> (indexMatcherRegex.test(options.files[i])) {
+                    options.index = options.files[i];
+                }
+            }
+        }
+        <span class="hljs-keyword">if</span> (!options.index) {
+            options.index = options.files[<span class="hljs-number">0</span>];
+        }
+        <span class="hljs-keyword">return</span> options;
+    });
+};</pre></div>
+            </div>
+        </li>
+        
+    </ul>
+</section>
+</body>
+</html>

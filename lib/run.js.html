@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>run</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_1.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_5.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/32px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/40px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/throbber.gif"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_7.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_8.css"/>
+    
+
+    
+    <script src="../assets/file_2.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_3.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_4.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_6.js"
+        type="text/javascript"></script>
+    
+
+    <script type="application/json" id="jsTreeJSON">
+        [{"id":"lib/parser.js","text":"parser.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"parser.js.html"},"state":{"selected":false}},{"id":"lib","text":"lib","icon":"jstree-folder","parent":"#","a_attr":{"href":"."},"state":{"opened":true}},{"id":"lib/file-resolver.js","text":"file-resolver.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"file-resolver.js.html"},"state":{"selected":false}},{"id":"lib/formatter.js","text":"formatter.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"formatter.js.html"},"state":{"selected":false}},{"id":"lib/markdown-renderer.js","text":"markdown-renderer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"markdown-renderer.js.html"},"state":{"selected":false}},{"id":"lib/normalizer.js","text":"normalizer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"normalizer.js.html"},"state":{"selected":false}},{"id":"lib/document.js","text":"document.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"document.js.html"},"state":{"selected":false}},{"id":"lib/resources","text":"resources","icon":"jstree-folder","parent":"lib","a_attr":{"href":"resources"},"state":{"opened":false}},{"id":"lib/resources/bootstrap.js","text":"bootstrap.js","icon":"jstree-file","parent":"lib/resources","a_attr":{"href":"resources/bootstrap.js.html"},"state":{"selected":false}},{"id":"lib/run.js","text":"run.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"run.js.html"},"state":{"selected":true}},{"id":"lib/writer.js","text":"writer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"writer.js.html"},"state":{"selected":false}},{"id":"Gruntfile.js","text":"Gruntfile.js","icon":"jstree-file","parent":"#","a_attr":{"href":"../Gruntfile.js.html"},"state":{"selected":false}},{"id":"README.md","text":"README.md","icon":"jstree-file","parent":"#","a_attr":{"href":"../README.md.html"},"state":{"selected":false}}]
+    </script>
+</head>
+<body class="markdown-body">
+<h1>
+    run
+</h1>
+<div class="subHeading">
+    lib/run.js
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
+</nav>
+<section>
+    <ul class="sectionDetails ">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+                
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> commander = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>);
+<span class="hljs-keyword">var</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>);
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+                <p> setup the commander</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    commander.version(
+        pkg.version
+    ).usage(
+        <span class="hljs-string">'[options] glob-patterns'</span>
+    ).option(
+        <span class="hljs-string">'-c, --css [file]'</span>,
+        <span class="hljs-string">'use a custom css file'</span>
+    ).option(
+        <span class="hljs-string">'-t, --theme [string]'</span>,
+        <span class="hljs-string">'use a custom markdown theme'</span>
+    ).option(
+        <span class="hljs-string">'-h, --highlightStyle [string]'</span>,
+        <span class="hljs-string">'use a highlightjs theme style. Styles are detailed here: https://highlightjs.org/static/demo/'</span>
+    ).option(
+        <span class="hljs-string">'-o, --output [path]'</span>,
+        <span class="hljs-string">'output to a given folder'</span>
+    ).option(
+        <span class="hljs-string">'-L, --languages [file]'</span>,
+        <span class="hljs-string">'use a custom languages.json'</span>
+    ).option(
+        <span class="hljs-string">'-m, --marked [file]'</span>,
+        <span class="hljs-string">'use custom marked options'</span>
+    ).option(
+        <span class="hljs-string">'-i, --index [file]'</span>,
+        <span class="hljs-string">'the file to be documented as the landing file for the documentation'</span>
+    ).parse(
+        process.argv
+    );
+    <span class="hljs-keyword">if</span> (commander.args.length) {
+        <span class="hljs-built_in">require</span>(<span class="hljs-string">'./document'</span>)(commander, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+            <span class="hljs-keyword">if</span> (err) {
+                <span class="hljs-built_in">console</span>.error(err);
+                <span class="hljs-built_in">console</span>.error(err.stack);
+                process.exit(<span class="hljs-number">1</span>);
+            }
+        });
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(commander.helpInformation());
+    }
+};</pre></div>
+            </div>
+        </li>
+        
+    </ul>
+</section>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>bootstrap</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/file_1.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/file_5.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/32px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/40px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/throbber.gif"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/file_7.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../../assets/file_8.css"/>
+    
+
+    
+    <script src="../../assets/file_2.js"
+        type="text/javascript"></script>
+    
+    <script src="../../assets/file_3.js"
+        type="text/javascript"></script>
+    
+    <script src="../../assets/file_4.js"
+        type="text/javascript"></script>
+    
+    <script src="../../assets/file_6.js"
+        type="text/javascript"></script>
+    
+
+    <script type="application/json" id="jsTreeJSON">
+        [{"id":"lib/parser.js","text":"parser.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../parser.js.html"},"state":{"selected":false}},{"id":"lib","text":"lib","icon":"jstree-folder","parent":"#","a_attr":{"href":".."},"state":{"opened":true}},{"id":"lib/file-resolver.js","text":"file-resolver.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../file-resolver.js.html"},"state":{"selected":false}},{"id":"lib/formatter.js","text":"formatter.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../formatter.js.html"},"state":{"selected":false}},{"id":"lib/markdown-renderer.js","text":"markdown-renderer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../markdown-renderer.js.html"},"state":{"selected":false}},{"id":"lib/normalizer.js","text":"normalizer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../normalizer.js.html"},"state":{"selected":false}},{"id":"lib/document.js","text":"document.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../document.js.html"},"state":{"selected":false}},{"id":"lib/resources","text":"resources","icon":"jstree-folder","parent":"lib","a_attr":{"href":"."},"state":{"opened":true}},{"id":"lib/resources/bootstrap.js","text":"bootstrap.js","icon":"jstree-file","parent":"lib/resources","a_attr":{"href":"bootstrap.js.html"},"state":{"selected":true}},{"id":"lib/run.js","text":"run.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../run.js.html"},"state":{"selected":false}},{"id":"lib/writer.js","text":"writer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"../writer.js.html"},"state":{"selected":false}},{"id":"Gruntfile.js","text":"Gruntfile.js","icon":"jstree-file","parent":"#","a_attr":{"href":"../../Gruntfile.js.html"},"state":{"selected":false}},{"id":"README.md","text":"README.md","icon":"jstree-file","parent":"#","a_attr":{"href":"../../README.md.html"},"state":{"selected":false}}]
+    </script>
+</head>
+<body class="markdown-body">
+<h1>
+    bootstrap
+</h1>
+<div class="subHeading">
+    lib/resources/bootstrap.js
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
+</nav>
+<section>
+    <ul class="sectionDetails ">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+                
+            </div><div class="content">
+                <div class="highlight"><pre>$(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    $.jstree.defaults.search.case_sensitive = <span class="hljs-literal">true</span>;
+    $.jstree.defaults.search.show_only_matches_children = <span class="hljs-literal">true</span>;
+    $.jstree.defaults.search.show_only_matches = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">var</span> to;
+    <span class="hljs-keyword">var</span> jsTreeData = <span class="hljs-built_in">JSON</span>.parse($(<span class="hljs-string">'#jsTreeJSON'</span>).text().trim());
+    <span class="hljs-keyword">var</span> $tree = $(<span class="hljs-string">'nav.navigationTree &gt; div'</span>).jstree({
+        core: {
+            data: jsTreeData,
+            themes: {
+                name: <span class="hljs-string">'default-dark'</span>
+            }
+        },
+        plugins: [
+            <span class="hljs-string">'search'</span>
+        ]
+    });</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+                <p> bind events to open page</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    $tree.on(<span class="hljs-string">'changed.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e, data</span>) </span>{
+        <span class="hljs-keyword">if</span> (!data.node) {
+            <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (data.node.icon === <span class="hljs-string">'jstree-file'</span>) {
+            <span class="hljs-built_in">window</span>.location.href = data.node.a_attr.href;
+        } <span class="hljs-keyword">else</span> {
+            $tree.jstree(<span class="hljs-string">'open_node'</span>, data.node);
+        }
+    });</pre></div>
+            </div>
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+                <p> open the selected node parent</p>
+
+            </div><div class="content">
+                <div class="highlight"><pre>    <span class="hljs-keyword">var</span> leafNode = <span class="hljs-built_in">window</span>.location.href.split(<span class="hljs-string">'/'</span>).pop();
+    $tree.on(<span class="hljs-string">'ready.jstree'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        $tree.jstree(<span class="hljs-string">'select_node'</span>, leafNode, <span class="hljs-literal">true</span>);
+    });
+
+    $(<span class="hljs-string">'.navigatorToggle'</span>).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+        e.stopPropagation();
+        <span class="hljs-keyword">var</span> nav = $(<span class="hljs-string">'nav.navigationTree'</span>);
+        <span class="hljs-keyword">if</span> (nav.hasClass(<span class="hljs-string">'minimized'</span>)) {
+            nav.removeClass(<span class="hljs-string">'minimized'</span>);
+            $(<span class="hljs-string">'nav.navigationTree'</span>).on(<span class="hljs-string">'click.navigator'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                e.stopPropagation();
+            });
+            $(<span class="hljs-string">'body'</span>).on(<span class="hljs-string">'click.navigator'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                nav.addClass(<span class="hljs-string">'minimized'</span>);
+            });
+        } <span class="hljs-keyword">else</span> {
+            $(<span class="hljs-string">'nav.navigationTree'</span>).off(<span class="hljs-string">'click.navigator'</span>);
+            $(<span class="hljs-string">'body'</span>).off(<span class="hljs-string">'click.navigator'</span>);
+            nav.addClass(<span class="hljs-string">'minimized'</span>);
+        }
+    });
+    $(<span class="hljs-string">'#jsTreeSearch'</span>).keyup(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (to) {
+            clearTimeout(to);
+        }
+        to = setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> v = $(<span class="hljs-string">'#jsTreeSearch'</span>).val();
+            $(<span class="hljs-string">'nav.navigationTree &gt; div'</span>).jstree(<span class="hljs-literal">true</span>).search(v);
+        }, <span class="hljs-number">250</span>);
+    });
+
+});</pre></div>
+            </div>
+        </li>
+        
+    </ul>
+</section>
+</body>
+</html>

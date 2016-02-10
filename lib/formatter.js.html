@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>formatter</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_1.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_5.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/32px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/40px.png"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/throbber.gif"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_7.css"/>
+    
+    <link rel="stylesheet"
+        media="all"
+        href="../assets/file_8.css"/>
+    
+
+    
+    <script src="../assets/file_2.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_3.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_4.js"
+        type="text/javascript"></script>
+    
+    <script src="../assets/file_6.js"
+        type="text/javascript"></script>
+    
+
+    <script type="application/json" id="jsTreeJSON">
+        [{"id":"lib/parser.js","text":"parser.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"parser.js.html"},"state":{"selected":false}},{"id":"lib","text":"lib","icon":"jstree-folder","parent":"#","a_attr":{"href":"."},"state":{"opened":true}},{"id":"lib/file-resolver.js","text":"file-resolver.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"file-resolver.js.html"},"state":{"selected":false}},{"id":"lib/formatter.js","text":"formatter.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"formatter.js.html"},"state":{"selected":true}},{"id":"lib/markdown-renderer.js","text":"markdown-renderer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"markdown-renderer.js.html"},"state":{"selected":false}},{"id":"lib/normalizer.js","text":"normalizer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"normalizer.js.html"},"state":{"selected":false}},{"id":"lib/document.js","text":"document.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"document.js.html"},"state":{"selected":false}},{"id":"lib/resources","text":"resources","icon":"jstree-folder","parent":"lib","a_attr":{"href":"resources"},"state":{"opened":false}},{"id":"lib/resources/bootstrap.js","text":"bootstrap.js","icon":"jstree-file","parent":"lib/resources","a_attr":{"href":"resources/bootstrap.js.html"},"state":{"selected":false}},{"id":"lib/run.js","text":"run.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"run.js.html"},"state":{"selected":false}},{"id":"lib/writer.js","text":"writer.js","icon":"jstree-file","parent":"lib","a_attr":{"href":"writer.js.html"},"state":{"selected":false}},{"id":"Gruntfile.js","text":"Gruntfile.js","icon":"jstree-file","parent":"#","a_attr":{"href":"../Gruntfile.js.html"},"state":{"selected":false}},{"id":"README.md","text":"README.md","icon":"jstree-file","parent":"#","a_attr":{"href":"../README.md.html"},"state":{"selected":false}}]
+    </script>
+</head>
+<body class="markdown-body">
+<h1>
+    formatter
+</h1>
+<div class="subHeading">
+    lib/formatter.js
+</div>
+<button type="button" class="navigatorToggle">&#9776; files...</button>
+<nav class="navigationTree minimized">
+    <input type="text" id="jsTreeSearch" placeholder="search..."/>
+    <div></div>
+</nav>
+<section>
+    <ul class="sectionDetails codeOnly">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+                
+            </div><div class="content">
+                <div class="highlight"><pre><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> marked = <span class="hljs-built_in">require</span>(<span class="hljs-string">'marked'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> highlightjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'highlight.js'</span>);
+<span class="hljs-keyword">var</span> <span class="hljs-built_in">escape</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'escape-html'</span>);
+<span class="hljs-keyword">var</span> markdownRenderer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./markdown-renderer'</span>);
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">filePath, options, sections</span>) </span>{
+    <span class="hljs-keyword">var</span> markedOptions = options.marked;
+    <span class="hljs-keyword">var</span> language = options.languages[path.extname(filePath)] || {
+            name: path.extname(filePath).replace(<span class="hljs-regexp">/^\./</span>, <span class="hljs-string">''</span>)
+        };
+    marked.setOptions(markedOptions);
+    marked.setOptions({
+        highlight: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">code, lang</span>) </span>{
+            lang = (lang || language.name);
+            <span class="hljs-keyword">if</span> (highlightjs.getLanguage(lang)) {
+                <span class="hljs-keyword">return</span> highlightjs.highlight(lang, code).value;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">'docco: couldn\'t highlight code block with unknown language "'</span> + lang + <span class="hljs-string">'" in '</span> + code);
+                <span class="hljs-keyword">return</span> code;
+            }
+        }
+    });
+    <span class="hljs-keyword">var</span> mdRenderer = markdownRenderer(filePath, options);
+    <span class="hljs-keyword">var</span> results = [];
+    <span class="hljs-keyword">var</span> highlightedText;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = sections.length; i &lt; len; i = i + <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">var</span> section = sections[i];
+        <span class="hljs-keyword">if</span> (section.codeText.trim()) {
+            <span class="hljs-keyword">try</span> {
+                highlightedText = highlightjs.highlight(
+                    language.name,
+                    section.codeText
+                ).value;
+            } <span class="hljs-keyword">catch</span> (e) {
+                highlightedText = <span class="hljs-built_in">escape</span>(section.codeText);
+            }
+            section.codeHtml = <span class="hljs-string">'&lt;div class="highlight"&gt;&lt;pre&gt;'</span> +
+                highlightedText.replace(
+                    <span class="hljs-regexp">/\s+$/</span>,
+                    <span class="hljs-string">''</span>
+                ) +
+                <span class="hljs-string">'&lt;/pre&gt;&lt;/div&gt;'</span>;
+        }
+        <span class="hljs-keyword">if</span> (section.docsText.trim()) {
+            section.docsHtml = marked(section.docsText, {
+                renderer: mdRenderer
+            });
+        }
+        results.push(section);
+    }
+    <span class="hljs-keyword">return</span> results;
+};</pre></div>
+            </div>
+        </li>
+        
+    </ul>
+</section>
+</body>
+</html>
